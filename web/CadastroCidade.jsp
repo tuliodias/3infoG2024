@@ -5,7 +5,7 @@
 --%>
 
 <%
-    String nome = "Tulio Dias";
+    String mensagem = request.getParameter("mensagem");
 
 %>
 
@@ -28,6 +28,7 @@
             <input type="submit" value="Cadastrar" name="Cadastrar" />
             
         </form>
+        <br>  <%= (mensagem==null)?"":mensagem%>
 
     </body>
 </html>
