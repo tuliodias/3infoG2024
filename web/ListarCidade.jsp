@@ -13,6 +13,8 @@ List<Cidade> listaCidade = objDAOCidade.listarCidade();
             <th>CODIGO</th>
             <th>NOME</th>
             <th>UF</th>
+            <th>ALTERAR</th>
+            <th>EXCLUIR</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +23,9 @@ List<Cidade> listaCidade = objDAOCidade.listarCidade();
             <td><%= cidade.getCodigoCidade()%></td>
             <td><%= cidade.getNomeCidade() %></td>
             <td><%= cidade.getUfCidade() %></td>
+            <td><a href="CadastroCidade.jsp?opcao=alterar&codigoCidade=<%= cidade.getCodigoCidade()%>&nomeCidade=<%= cidade.getNomeCidade() %>&ufCidade=<%= cidade.getUfCidade() %>">alterar</a> </td>
+            <td><a href="CadastroCidade.jsp?opcao=excluir&codigoCidade=<%= cidade.getCodigoCidade()%>&nomeCidade=<%= cidade.getNomeCidade() %>&ufCidade=<%= cidade.getUfCidade() %>">excluir</a> </td>
+                   
         </tr>
         
         <%}%>
