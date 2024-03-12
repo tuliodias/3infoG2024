@@ -5,11 +5,12 @@
  */
 package modelo;
 
-import com.mysql.jdbc.Statement;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -42,7 +43,7 @@ public class Conexao {
             con = getConexao();
         }
         try{
-            return con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+               return con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         }catch(SQLException ex){
             System.out.println("Erro no comando sql: "+ex.getMessage());
         }
