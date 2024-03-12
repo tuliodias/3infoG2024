@@ -4,7 +4,7 @@
 String nomeCidade = request.getParameter("nomeCidade");
 String ufCidade = request.getParameter("ufCidade");
 
-Cidade objCidade = new Cidade();
+Cidade  objCidade = new Cidade();
 objCidade.setNomeCidade(nomeCidade);
 objCidade.setUfCidade(ufCidade);
 DAOCidade objDAOCidade = new DAOCidade();
