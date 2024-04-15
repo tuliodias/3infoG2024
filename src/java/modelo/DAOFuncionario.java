@@ -11,26 +11,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOCidade {
+public class DAOFuncionario {
     String mensagem="";
+    ConverteData objConverteData = new ConverteData();
+    DAOCidade objDaoCidade = new DAOCidade();
 
-    public List<Cidade> listarCidade() {
-        List<Cidade> listaCidade = new ArrayList<>();
-        String sql = "select * from cidade";
+    public List<Funcionario> listarFuncionario() {
+        List<Funcionario> listaFuncionario = new ArrayList<>();
+        String sql = "select * from funcionario";
         try{
             PreparedStatement pst = Conexao.getPreparedStatement(sql);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                Cidade objCidade = new Cidade();
-                objCidade.setCodigoCidade(rs.getInt("codigo"));
-                objCidade.setNomeCidade(rs.getString("nome"));
-                objCidade.setUfCidade(rs.getString("uf"));
-                listaCidade.add(objCidade);
+                Funcionario objFuncionario = new Funcionario();
+                objFuncionario.setCodigoFuncionario(rs.getInt("codigo"));
+                objFuncionario.setNomeFuncionario(rs.getString("nome"));
+                objFuncionario.setSalarioFuncionario(rs.getDouble("salario"));
+                objFuncionario.setDataNascimento(objConverteData.converteCalendario(rs.getDate("nascimento")));
+              
+                listaFuncionario.add(objFuncionario);
             }
         }catch(SQLException ex){
        System.out.println("Erro no listaCidade do DAOCidade:"+ex.getMessage());
         }
-       return listaCidade;
+       return listaFuncionario;
 
     }
     
@@ -84,25 +88,6 @@ public class DAOCidade {
                     +ex.getMessage()+"\n Comando sql="+sql;
         }
       return mensagem;  
-    }
-    
-      public Cidade localizar(Integer id){
-        String sql = "select * from cidade where codigo=?";
-        Cidade objCidade = new Cidade();
-        try{
-            PreparedStatement pst = Conexao.getPreparedStatement(sql);
-            pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            while(rs.next()){
-                objCidade.setCodigoCidade(rs.getInt("codigo"));
-                objCidade.setNomeCidade(rs.getString("nome"));
-                objCidade.setUfCidade(rs.getString("uf"));
-                return objCidade;
-            }
-        }catch(SQLException e){
-            System.out.println("Erro de SQL Localizar"+e.getMessage());
-    }
-        return null;
     }
 
 }
