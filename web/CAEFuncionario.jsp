@@ -1,30 +1,39 @@
-<%@page import="modelo.DAOCidade"%>
-<%@page import="modelo.Cidade"%>
+<%@page import="modelo.DAOFuncionario"%>
+<%@page import="modelo.ConverteData"%>
+<%@page import="modelo.Funcionario"%>
+
 <%
-String nomeCidade = request.getParameter("nomeCidade");
-String ufCidade = request.getParameter("ufCidade");
-String opcao = request.getParameter("opcao");
+String nomeFuncionario = request.getParameter("nomeFuncionario");
+String salarioFuncionario = request.getParameter("salarioFuncionario");
+String nascimentoFuncionario = request.getParameter("nascimentoFuncionario");
 String codigoCidade = request.getParameter("codigoCidade");
+String opcao = request.getParameter("opcao");
+String codigoFuncionario = request.getParameter("codigoFuncionario");
 String mensagem="";
 
-Cidade  objCidade = new Cidade();
-objCidade.setCodigoCidade(Integer.parseInt(codigoCidade));
-objCidade.setNomeCidade(nomeCidade);
-objCidade.setUfCidade(ufCidade);
-DAOCidade objDAOCidade = new DAOCidade();
+ConverteData converte = new ConverteData();
+
+Funcionario objFuncionario = new Funcionario();
+objFuncionario.setCodigoFuncionario(Integer.valueOf(codigoFuncionario));
+objFuncionario.setNomeFuncionario(nomeFuncionario);
+objFuncionario.setSalarioFuncionario(Double.valueOf(salarioFuncionario));
+objFuncionario.setDataNascimento(converte.converteCalendario(nascimentoFuncionario));
+objFuncionario.getObjCidade().setCodigoCidade(Integer.valueOf(codigoCidade));
+
+
+
+DAOFuncionario objDaoFuncionario = new DAOFuncionario();
 if(opcao.equals("cadastrar")){
-mensagem = objDAOCidade.inserirCidade(objCidade);
+mensagem = objDaoFuncionario.inserirFuncionario(objFuncionario);
 }
 if(opcao.equals("alterar")){
-mensagem = objDAOCidade.alterarCidade(objCidade);
+mensagem = objDaoFuncionario.alterarFuncionario(objFuncionario);
 }
 if(opcao.equals("excluir")){
-mensagem = objDAOCidade.excluirCidade(objCidade);
+mensagem = objDaoFuncionario.excluirFuncionario(objFuncionario);
 }
-if(opcao.equals("cancelar")){
-   response.sendRedirect("CadastroCidade.jsp?opcao=cadastrar"); 
-}
-response.sendRedirect("CadastroCidade.jsp?mensagem="+mensagem);
+
+response.sendRedirect("CadastroFuncionario.jsp?mensagem="+mensagem);
 %>
 
 

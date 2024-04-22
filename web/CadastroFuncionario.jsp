@@ -50,7 +50,11 @@
             <p> <label>Cidade</label>
                 <select name="codigoCidade">
                     <% for (Cidade cidade : listaCidade2) { %>
-                    <option value="<%= cidade.getCodigoCidade() %>"> <%= cidade.getNomeCidade() %></option>
+                    <% if (codigoCidade.equals(String.valueOf(cidade.getCodigoCidade()))) {%>
+                    <option selected value="<%= cidade.getCodigoCidade()%>"> <%= cidade.getNomeCidade()%></option>
+                    <% } else {%>
+                    <option  value="<%= cidade.getCodigoCidade()%>"> <%= cidade.getNomeCidade()%></option>
+                    <%}%>
                     <%}%>
                 </select>
             </p> 
@@ -69,7 +73,7 @@
 
             <% }%>
             <input type="hidden" name="opcao" value="<%= opcao%>">
-            <input type="hidden" name="codigoFuncionario" value="<%= codigoFuncionario %>">
+            <input type="hidden" name="codigoFuncionario" value="<%= codigoFuncionario%>">
         </form>
         <br>  <%= (mensagem == null) ? "" : mensagem%>
 
